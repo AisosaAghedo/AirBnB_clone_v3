@@ -11,13 +11,15 @@ import os
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
+
 @app.teardown_appcontext
 def teardown(exception):
     """teardown method meant for storage"""
     storage.close()
 
+
 if __name__ == "__main__":
-    app_host = os.getenv('HBNB_API_HOST') 
+    app_host = os.getenv('HBNB_API_HOST')
     app_port = os.getenv('HBNB_API_PORT')
     if app_host is None:
         app_host = '0.0.0.0'

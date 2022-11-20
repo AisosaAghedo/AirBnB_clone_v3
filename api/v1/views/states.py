@@ -8,7 +8,7 @@ from models import storage
 from models import State
 
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
-@app_views.route('/states/<states_id>', methods=[="GET"], strict_slashes=False)
+@app_views.route('/states/<states_id>', methods=["GET"], strict_slashes=False)
 def state(state_id=None):
     '''Retrieves a State object'''
     if state_id is None:

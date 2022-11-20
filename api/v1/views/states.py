@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-'''view for State objects that handles all default 
-RESTFul API actions'''
+"""view for State objects that handles all default 
+RESTFul API actions"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request
@@ -10,7 +10,7 @@ from models import State
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
 @app_views.route('/states/<states_id>', methods=["GET"], strict_slashes=False)
 def state(state_id=None):
-    '''Retrieves a State object'''
+    """Retrieves a State object"""
     if state_id is None:
         states = storage.all("State")
         my_states = [value.to_dict() for key, value in states.items()]
@@ -23,7 +23,7 @@ def state(state_id=None):
 
 @app_views.route('/state/<s_id>', methods=["DELETE"], strict_slashes=False)
 def delete_states(s_id):
-    ''' Deletes a State object '''
+    """ Deletes a State object """
 
     my_state = storage/get("State", s_id)
     if my_state is None:
@@ -50,7 +50,7 @@ def post_states():
 
 @app_views.route('/state/<state_id>', methods=["PUT"], strict_slashes=False)
 def update_states(state_id):
-    '''Updates a State object'''
+    """Updates a State object"""
     
     content = request.get_json()
     if content is None:

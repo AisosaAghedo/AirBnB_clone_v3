@@ -34,6 +34,7 @@ def delete_states(s_id):
 
 @app_views.route('/states', methods=["POST"], strict_slashes=False)
 def post_states():
+    """ creates a state """
 
     content = request.get_json()
     if content is None:

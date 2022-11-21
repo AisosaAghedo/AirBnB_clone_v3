@@ -63,7 +63,7 @@ def post_states(state_id):
 
     content['state_id'] = state_id
     new_city = City(**content)
-    new_state.save()
+    new_city.save()
     return jsonify(new_city.to_dict()), 201
 
 

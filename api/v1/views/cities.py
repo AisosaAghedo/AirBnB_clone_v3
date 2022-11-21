@@ -4,9 +4,9 @@ RESTFul API actions"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request
-from . import City
-from . import storage
-from . import State
+from models.city import City
+from models import storage
+from models.state import State
 
 
 @app_views.route('/states/<string:state_id>/cities', methods=["GET"],
@@ -16,10 +16,10 @@ def getting_cities(state_id):
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
-    new_city = []
+    cities = []
     for city in state.cities():
-        new_city.append(city.to_dict())
-    return jsonify(new_city)
+        cities.append(city.to_dict())
+    return jsonify(cities)
 
 
 @app_views.route('/cities/<string:city_id>', methods=["GET"],

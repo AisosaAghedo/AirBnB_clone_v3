@@ -3,7 +3,7 @@
 RESTFul API actions"""
 
 from api.v1.views import app_views
-from flask import jsonify, abort, request, make_response
+from flask import jsonify, abort, request
 from models.state import State
 from . import storage
 
@@ -49,13 +49,13 @@ def post_states():
 
     content = request.get_json()
     if not content:
-        return make_respose(jsonify({'error': "Not a JSON"}), 400)
+        return jsonify(error="Not a JSON"), 400
     if 'name' not in content:
-        return make_response(jsonify({'error': "Missing name"}), 400)
+        return jsonify(error="Missing name"), 400
 
     new_state = State(**content)
     new_state.save()
-    return make_response(jsonify(new_state.to_dict()), 201)
+    return jsonify(new_state.to_dict()), 201
 
 
 @app_views.route('/states/<string:state_id>', methods=["PUT"],
@@ -66,7 +66,7 @@ def update_states(state_id):
     if state is None:
         abort(404)
     if not request.get_json():
-        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+        return jsonify(error='Not a JSON'), 400
     for attr, val in request.get_json().items():
         if attr not in ['id', 'created_at', 'updated_at']:
             setattr(state, attr, val)

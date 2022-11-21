@@ -16,7 +16,7 @@ def getting_state():
     return jsonify(my_states)
 
 
-@app_views.route('/states/<string: states_id>', methods=["GET"], strict_slashes=False)
+@app_views.route('/states/<string: state_id>', methods=["GET"], strict_slashes=False)
 def state(state_id):
     """ Retrieves a State object """
     my_states = storage.get("State", state_id)
@@ -35,12 +35,12 @@ def delete_states(state_id):
     storage.save()
     return jsonify({})
 
-@app_views.route('/states', methods=["POST"], strict_slashes=False)
+@app_views.route('/states/', methods=["POST"], strict_slashes=False)
 def post_states():
     """ creates a state """
 
     content = request.get_json()
-    if content is None:
+    if not content:
         return jsonify(error="Not a JSON"), 400
     if 'name' not in content:
         return jsonify(error="Missing name"), 400

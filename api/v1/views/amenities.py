@@ -72,4 +72,3 @@ def update_amenities(amenity_id):
             setattr(amenity, attr, val)
     amenity.save()
     return jsonify(amenity.to_dict())
-

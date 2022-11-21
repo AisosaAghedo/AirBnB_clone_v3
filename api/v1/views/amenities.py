@@ -4,7 +4,7 @@ RESTFul API actions"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request
-from models.state import Amenity
+from models.amenity import Amenity
 from . import storage
 
 

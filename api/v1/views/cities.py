@@ -9,7 +9,7 @@ from . import storage
 from . import State
 
 
-@app_views.route('/states/<string: state_id>/cities', methods=["GET"],
+@app_views.route('/states/<string:state_id>/cities', methods=["GET"],
                  strict_slashes=False)
 def getting_cities(state_id):
     """Retrieves the list of all City object of a State"""
@@ -22,9 +22,9 @@ def getting_cities(state_id):
     return jsonify(new_city)
 
 
-@app_views.route('/cities/<string: city_id>', methods=["GET"],
+@app_views.route('/cities/<string:city_id>', methods=["GET"],
                  strict_slashes=False)
-def state(city_id):
+def city(city_id):
     """ Retrieves a City object """
     my_city = storage.get(City, city_id)
     if my_city is not None:
@@ -33,9 +33,9 @@ def state(city_id):
         abort(404)
 
 
-@app_views.route('/cities/<string: city_id>', methods=["DELETE"],
+@app_views.route('/cities/<string:city_id>', methods=["DELETE"],
                  strict_slashes=False)
-def delete_states(city_id):
+def delete_city(city_id):
     """ Deletes a City object """
 
     my_city = storage.get(City, city_id)
@@ -47,9 +47,9 @@ def delete_states(city_id):
         return jsonify({})
 
 
-@app_views.route('/states/<string: state_id>/cities', methods=["POST"],
+@app_views.route('/states/<string:state_id>/cities', methods=["POST"],
                  strict_slashes=False)
-def post_states(state_id):
+def post_city(state_id):
     """ creates a city """
 
     content = request.get_json()
@@ -67,9 +67,9 @@ def post_states(state_id):
     return jsonify(new_city.to_dict()), 201
 
 
-@app_views.route('/cities/<string: city_id>', methods=["PUT"],
+@app_views.route('/cities/<string:city_id>', methods=["PUT"],
                  strict_slashes=False)
-def update_states(city_id):
+def update_city(city_id):
     """Updates a City object"""
     city = storage.get(City, city_id)
     if city is None:
@@ -81,5 +81,3 @@ def update_states(city_id):
             setattr(city, attr, val)
     city.save()
     return jsonify(city.to_dict())
-
-

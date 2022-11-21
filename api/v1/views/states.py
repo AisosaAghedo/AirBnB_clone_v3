@@ -5,7 +5,7 @@ RESTFul API actions"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models.state import State
-from . import storage
+from . import storage
 
 
 @app_views.route('/states', methods=["GET"], strict_slashes=False)

@@ -2,7 +2,7 @@
 """reviews.py"""
 
 from api.v1.views import app_views
-from flask import abort, jsonify, request, make_respons
+from flask import abort, jsonify, request, make_response
 from models import storage
 from models.review import Review
 from models.user import User

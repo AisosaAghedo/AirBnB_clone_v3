@@ -12,7 +12,7 @@ from . import storage
 def getting_state():
     """Retrieves the list of all State objects"""
     my_states = []
-    for state in storage.all(State).values():
+    for state in storage.all("State").values():
         my_states.append(state.to_dict())
     return jsonify(my_states)
 
@@ -21,7 +21,7 @@ def getting_state():
                  strict_slashes=False)
 def state(state_id):
     """ Retrieves a State object """
-    my_states = storage.get(State, state_id)
+    my_states = storage.get("State", state_id)
     if my_states is not None:
         return jsonify(my_states.to_dict())
     else:
@@ -33,7 +33,7 @@ def state(state_id):
 def delete_states(state_id):
     """ Deletes a State object """
 
-    my_state = storage.get(State, state_id)
+    my_state = storage.get("State", state_id)
     if my_state is None:
         abort(404)
     else:

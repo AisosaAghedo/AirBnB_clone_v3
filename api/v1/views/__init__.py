@@ -13,7 +13,7 @@ app_views = Blueprint("app_views", __name__, url_prefix="/api/v1")
 __all__ = [app_views, storage, City, User, Place, State, Review, Amenity]
 
 from .index import *
-#from .users import *
+from .users import *
 #from .places import *
 from .states import *
 from .cities import *

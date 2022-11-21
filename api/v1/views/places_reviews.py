@@ -2,12 +2,13 @@
 """reviews.py"""
 
 from api.v1.views import app_views
-from flask import abort, jsonify, request, make_response
+from flask import abort, jsonify, request, make_respons
 from models import storage
 from models.review import Review
 from models.user import User
 from models.place import Place
 from models.city import City
+
 
 @app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)

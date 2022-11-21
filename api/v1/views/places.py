@@ -53,7 +53,7 @@ def delete_place(place_id):
 def post_place(city_id):
     """ creates a place """
 
-    content = request.get_json(city_id)
+    content = request.get_json()
     city = storage.get(City, city_id)
     if city is None:
         abort(404)

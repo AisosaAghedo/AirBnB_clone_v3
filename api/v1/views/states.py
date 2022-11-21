@@ -24,7 +24,7 @@ def state(state_id):
         return jsonify(my_states.to_dict())
     abort(404)
 
-@app_views.route('/state/<string:state_id>', methods=["DELETE"], strict_slashes=False)
+@app_views.route('/states/<string:state_id>', methods=["DELETE"], strict_slashes=False)
 def delete_states(state_id):
     """ Deletes a State object """
 
@@ -50,7 +50,7 @@ def post_states():
 
     return jsonify(new_state.to_dict()), 201
 
-@app_views.route('/state/<string: state_id>', methods=["PUT"], strict_slashes=False)
+@app_views.route('/states/<string: state_id>', methods=["PUT"], strict_slashes=False)
 def update_states(state_id):
     """Updates a State object"""
     

@@ -13,10 +13,10 @@ from . import State
                  strict_slashes=False)
 def getting_cities(state_id):
     """Retrieves the list of all City object of a State"""
-    new_city = []
     state = storage.get(State, state_id)
     if state is None:
         abort(404)
+    new_city = []
     for city in state.cities():
         new_city.append(city.to_dict())
     return jsonify(new_city)
@@ -52,7 +52,7 @@ def delete_city(city_id):
 def post_city(state_id):
     """ creates a city """
 
-    content = request.get_json()
+    content = request.get_json(state_id)
     state = storage.get(State, state_id)
     if state is None:
         abort(404)

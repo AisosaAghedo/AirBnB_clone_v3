@@ -50,8 +50,10 @@ def post_users():
     content = request.get_json()
     if not content:
         return jsonify(error="Not a JSON"), 400
-    if 'name' not in content:
-        return jsonify(error="Missing name"), 400
+    if 'email' not in content:
+        return jsonify(error="Missing email"), 400
+    if 'password' not in content:
+        return jsonify(error="Missing password"), 400
 
     new_user = User(**content)
     new_user.save()
@@ -68,9 +70,7 @@ def update_users(user_id):
     if not request.get_json():
         return jsonify(error='Not a JSON'), 400
     for attr, val in request.get_json().items():
-        if attr not in ['id', 'created_at', 'updated_at']:
+        if attr not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(user, attr, val)
     user.save()
     return jsonify(user.to_dict())
-
-

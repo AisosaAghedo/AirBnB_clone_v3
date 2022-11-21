@@ -5,17 +5,19 @@ RESTFul API actions"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models import storage
-from models import State
+from models.state import State
 
 @app_views.route('/states', methods=["GET"], strict_slashes=False)
-@app_views.route('/states/<states_id>', methods=["GET"], strict_slashes=False)
+def getting_state():
+    """Retrieves the list of all State objects"""
+    states = storage.all("State")
+    my_states = [value.to_dict() for key, value in states.items()]
+    return jsonify(my_states)
+
+
+@app_views.route('/states/<string: states_id>', methods=["GET"], strict_slashes=False)
 def state(state_id=None):
-    """Retrieves a State object"""
-    if state_id is None:
-        states = storage.all("State")
-        my_states = [value.to_dict() for key, value in states.items()]
-        return jsonify(my_states)
-    
+    """ Retrieves a State object """
     my_states = storage.get("State", state_id)
     if my_states is not None:
         return jsonify(my_states.to_dict())
@@ -44,7 +46,7 @@ def post_states():
         return (jsonify({"error": "Missing name"}), 400)
 
     new_state = State(**content)
-    new_state.save
+    new_state.save()
 
     return (jsonify(new_state.to_dict()), 201)
 

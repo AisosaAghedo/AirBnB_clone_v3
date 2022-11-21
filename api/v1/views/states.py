@@ -31,7 +31,7 @@ def delete_states(state_id):
     my_state = storage.get("State", state_id)
     if my_state is None:
         abort(404)
-    storage.delete(my_state)
+    storage.delete()
     storage.save()
     return jsonify({})
 

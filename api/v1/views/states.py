@@ -41,10 +41,9 @@ def post_states():
 
     content = request.get_json()
     if content is None:
-        return jsonify({"error": "Not a JSON"}), 400
-    name = content.get("name")
-    if name is None:
-        return jsonify({"error": "Missing name"}), 400
+        return jsonify(error="Not a JSON"), 400
+    if 'name' not in content:
+        return jsonify(error="Missing name"), 400
 
     new_state = State(**content)
     new_state.save()

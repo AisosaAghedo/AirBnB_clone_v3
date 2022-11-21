@@ -4,9 +4,9 @@ RESTFul API actions"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request
-from models.city import City
+from . import City
 from . import storage
-from models.state import State
+from . import State
 
 
 @app_views.route('/states/<string: state_id>/cities', methods=["GET"],

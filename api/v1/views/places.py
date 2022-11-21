@@ -61,6 +61,8 @@ def post_place(city_id):
         return jsonify(error="Not a JSON"), 400
     if 'user_id' not in content:
         return jsonify(error="Missing user_id"), 400
+    if 'name' not in content:
+        return jsonify(error="Missing name"), 400
 
     user = storage.get(User, content['user_id'])
     if user is None:

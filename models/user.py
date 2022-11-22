@@ -8,6 +8,7 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 
 
+
 class User(BaseModel, Base):
     """Representation of a user """
     if models.storage_t == 'db':
@@ -26,10 +27,14 @@ class User(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         """initializes user"""
+        if kwargs.get('password') is not None:
+            passwd = kwargs['password']
+            del kwargs['password']
+            self.__secure_password(passwd)
         super().__init__(*args, **kwargs)
 
-    def __setattr__(self, name, value):
+    def __set_password(self, passwd):
         """sets a password with md5 encryption"""
-        if name == "password":
-            value = md5(value.encode()).hexdigest()
-        super().__setattr__(name, value)
+        secure = hashlib.md5()
+        secure.update(passwd.encode("utf-8"))
+        self.password = secure.hexdigest()

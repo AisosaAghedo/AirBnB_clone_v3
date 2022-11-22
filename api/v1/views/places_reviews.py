@@ -8,6 +8,8 @@ from models.review import Review
 from models.user import User
 from models.place import Place
 from models.city import City
+
+
 @app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 def get_reviews(place_id=None):
@@ -16,6 +18,8 @@ def get_reviews(place_id=None):
     if place_objs:
         return jsonify([obj.to_dict() for obj in place_objs.reviews])
     abort(404)
+
+
 @app_views.route('/reviews/<review_id>', methods=['GET'], strict_slashes=False)
 def get_review(review_id=None):
     """Return a review using its id"""
@@ -23,6 +27,8 @@ def get_review(review_id=None):
     if review_obj:
         return jsonify(review_obj.to_dict())
     abort(404)
+
+
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
                  strict_slashes=False)
 def delete_review(review_id=None):
@@ -33,6 +39,8 @@ def delete_review(review_id=None):
         storage.save()
         return make_response(jsonify({}), 200)
     abort(404)
+
+
 @app_views.route('/places/<place_id>/reviews', methods=['POST'],
                  strict_slashes=False)
 def review_post(place_id=None):
@@ -53,6 +61,8 @@ def review_post(place_id=None):
         storage.save()
         return make_response(jsonify(new_review.to_dict()), 201)
     abort(404)
+
+
 @app_views.route('/reviews/<review_id>', methods=['PUT'],
                  strict_slashes=False)
 def review_put(review_id=None):

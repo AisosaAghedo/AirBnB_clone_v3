@@ -59,7 +59,7 @@ def review_post(place_id=None):
         new_review.place_id = place_objs.id
         storage.new(new_review)
         storage.save()
-        return make_response(jsonify(new_review.to_dict()), 201)
+    return make_response(jsonify(new_review.to_dict()), 201)
     abort(404)
 
 

@@ -70,6 +70,8 @@ def post_place(city_id):
 
     content['city_id'] = city_id
     new_place = place(**content)
+    for key, val in content.items():
+        setattr(new_place, key, val)
     new_place.save()
     return jsonify(new_place.to_dict()), 201
 

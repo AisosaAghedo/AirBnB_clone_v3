@@ -46,11 +46,10 @@ def post_users():
 
     new_user = User(**content)
     new_user.save()
-@@ -68,9 +70,7 @@ def update_users(user_id):
+def update_users(user_id):
     if not request.get_json():
         return jsonify(error='Not a JSON'), 400
     for attr, val in request.get_json().items():
-        if attr not in ['id', 'created_at', 'updated_at']:
         if attr not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(user, attr, val)
     user.save()
